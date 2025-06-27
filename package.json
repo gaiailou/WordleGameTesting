@@ -1,0 +1,20 @@
+{
+  "name": "WordleGameTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "vitest": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4",
+  "devDependencies": {
+    "@vitest/coverage-v8": "3.2.4",
+    "vitest": "^3.2.4"
+  }
+}

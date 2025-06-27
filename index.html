@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Wordle Simple by le chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      max-width: 400px;
+    }
+    input {
+      font-size: 1.2rem;
+      padding: 0.3rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      text-transform: lowercase;
+      letter-spacing: 0.2rem;
+    }
+    button {
+      font-size: 1.1rem;
+      padding: 0.5rem;
+      width: 100%;
+    }
+    .result {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      word-break: break-word;
+    }
+    .correct { color: green; }
+    .present { color: orange; }
+    .absent { color: gray; }
+  </style>
+</head>
+<body>
+
+  <h1>Test Wordle Simple</h1>
+  <p>Mot secret codé : <strong id="mot-secret"></strong></p>
+
+  <input type="text" id="guess-input" maxlength="5" placeholder="Tape ton mot (5 lettres)" />
+  <button id="submit-btn">Vérifier</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    // Mot secret codé (à modifier ici)
+    const motSecret = 'salut'
+
+    // Affiche le mot secret (optionnel, pour test)
+    document.getElementById('mot-secret').textContent = motSecret
+
+    const input = document.getElementById('guess-input')
+    const btn = document.getElementById('submit-btn')
+    const resultDiv = document.getElementById('result')
+
+    // Fonction simple de validation du mot (5 lettres alphabétiques)
+    function validerMot(mot) {
+      return /^[a-zA-Z]{5}$/.test(mot)
+    }
+
+    // Fonction checkGuess (simplifiée, pas la version complète)
+    function checkGuess(secret, guess) {
+      if (secret.length !== guess.length) throw new Error('Longueurs différentes')
+      const result = []
+      for (let i = 0; i < secret.length; i++) {
+        if (guess[i] === secret[i]) {
+          result.push('correct')
+        } else if (secret.includes(guess[i])) {
+          result.push('present')
+        } else {
+          result.push('absent')
+        }
+      }
+      return result
+    }
+
+    btn.onclick = () => {
+      const guess = input.value.toLowerCase()
+      if (!validerMot(guess)) {
+        alert('Le mot doit contenir 5 lettres alphabétiques.')
+        return
+      }
+      try {
+        const feedback = checkGuess(motSecret, guess)
+        resultDiv.innerHTML = feedback.map(f => `<span class="${f}">${f}</span>`).join(' ')
+      } catch(e) {
+        alert(e.message)
+      }
+    }
+  </script>
+
+</body>
+</html>
