@@ -24,3 +24,6 @@ export class WordleGameStats {
     return this.partiesGagnées === 0 ? 0 : this.totalEssais / this.partiesGagnées
   }
 }
+
+// Export d'une instance globale
+export const stats = new WordleGameStats()
