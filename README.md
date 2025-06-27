@@ -45,3 +45,8 @@ Le projet est découpé en modules pour mieux isoler les responsabilités :
 pnpm install
 pnpm run vitest
 ```
+pour afficher l'UI :
+```bash
+pnpm run dev
+```
+puis se rendre sur l'url donnée par **vite** (souvent http://localhost:5173/)
