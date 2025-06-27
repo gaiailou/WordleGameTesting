@@ -34,4 +34,9 @@ describe('Unité : checkGuess', () => {
     const tentative = 'salute'
     expect(() => checkGuess(motSecret, tentative)).toThrow()
   })
+  test('doit gérer correctement les lettres en double', () => {
+    const résultat = checkGuess('pelle', 'lente')
+    expect(résultat).toEqual(['present', 'correct', 'absent', 'absent', 'correct'])
+  })
+
 })

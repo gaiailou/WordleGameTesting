@@ -1,11 +1,11 @@
-# 🟩 Wordle Game Testing – Evaluation Test (Ynov)
+# Wordle Game Testing – Evaluation Test (Ynov)
 
 Projet personnel réalisé dans le cadre d’un TP d’évaluation sur la mise en place de tests unitaires.  
 L’objectif : coder une version simplifiée du jeu Wordle avec une couverture de tests d’au moins 70 %.
 
 ---
 
-## ✅ Fonctionnalités implémentées
+## Fonctionnalités implémentées
 
 - Vérification d’un mot (5 lettres alphabétiques uniquement)
 - Logique de comparaison entre mot secret et mot proposé :
@@ -16,9 +16,11 @@ L’objectif : coder une version simplifiée du jeu Wordle avec une couverture d
 - Tests unitaires avec **Vitest**
 - Rapport de couverture automatique
 
+Ajout des fonctionnalités : "Intermediate Requirements (+2 points)"
+
 ---
 
-## 🧠 Choix techniques
+## Choix techniques
 
 ### TypeScript
 Utilisé pour sécuriser le typage des fonctions (notamment les statuts de lettre `LetterStatus`).
@@ -29,9 +31,14 @@ Choisi pour sa compatibilité avec Vite, sa simplicité et sa rapidité. Permet 
 ### Architecture modulaire
 Le projet est découpé en modules pour mieux isoler les responsabilités :
 
-- `wordleGame.ts` : logique de vérification (`checkGuess`)
-- `validation.ts` : validation des mots saisis
-- `game.ts` : gestion du déroulement d’une partie
+| Fichier              | Rôle                                                         |
+|----------------------|--------------------------------------------------------------|
+| `wordleGame.ts`      | logique principale de vérification (`checkGuess`) `checkGuess`                              |
+| `validation.ts`      | validation des mots saisis                            |
+| `dictionnaire.ts`    | liste de mots autorisés                                      |
+| `game.ts`            | gestion du déroulement d’une partie (tentatives, fin, état)                 |
+| `stats.ts`           | statistiques globales de joueur                              |
+| `*.test.ts`          | tests unitaires pour chaque module                           |
 
 ## Run les tests
 ```bash

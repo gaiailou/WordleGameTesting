@@ -1,30 +1,36 @@
-export type LetterStatus = 'correct' | 'present' | 'absent';
+export type LetterStatus = 'correct' | 'present' | 'absent'
 
-export function checkGuess(secret: string, guess: string): LetterStatus[] {
-  if (secret.length !== guess.length) {
-    throw new Error('Secret and guess must have the same length');
+export function checkGuess(solution: string, tentative: string): LetterStatus[] {
+  if (solution.length !== tentative.length) {
+    throw new Error("Les deux mots doivent avoir la même longueur.")
   }
 
-  const result: LetterStatus[] = Array(secret.length).fill('absent');
-  const secretLetters = secret.split('');
+  const resultat: LetterStatus[] = Array(solution.length).fill('absent')
+  const lettresRestantes: Record<string, number> = {}
 
-  // Premier passage : lettres correctes
-  for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === secret[i]) {
-      result[i] = 'correct';
-      secretLetters[i] = ''; // Marquer comme utilisée
+  // Étape 1 : marquer les 'correct' et compter les lettres restantes de la solution
+  for (let i = 0; i < solution.length; i++) {
+    const lettreSolution = solution[i]
+    const lettreTentative = tentative[i]
+
+    if (lettreTentative === lettreSolution) {
+      resultat[i] = 'correct'
+    } else {
+      lettresRestantes[lettreSolution] = (lettresRestantes[lettreSolution] || 0) + 1
     }
   }
 
-  // Deuxième passage : lettres présentes
-  for (let i = 0; i < guess.length; i++) {
-    if (result[i] === 'correct') continue;
-    const index = secretLetters.indexOf(guess[i]);
-    if (index !== -1) {
-      result[i] = 'present';
-      secretLetters[index] = ''; // Marquer comme utilisée
+  // Étape 2 : marquer les 'present' si la lettre restante existe encore
+  for (let i = 0; i < solution.length; i++) {
+    const lettreTentative = tentative[i]
+
+    if (resultat[i] === 'correct') continue
+
+    if (lettresRestantes[lettreTentative]) {
+      resultat[i] = 'present'
+      lettresRestantes[lettreTentative]--
     }
   }
 
-  return result;
+  return resultat
 }
