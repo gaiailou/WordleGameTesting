@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { estMotValide } from './dictionnaire'
+import { estMotValide, tirerMotAleatoire, dictionnaire } from './dictionnaire'
 
 describe('Unité : estMotValide', () => {
   test('accepte un mot du dictionnaire', () => {
@@ -8,5 +8,10 @@ describe('Unité : estMotValide', () => {
 
   test('rejette un mot inconnu', () => {
     expect(estMotValide('azert')).toBe(false)
+  })
+
+  test('tirer un mot aléatoire renvoie un mot du dictionnaire', () => {
+    const mot = tirerMotAleatoire()
+    expect(dictionnaire.has(mot)).toBe(true)
   })
 })
