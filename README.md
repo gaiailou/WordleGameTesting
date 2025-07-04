@@ -45,6 +45,12 @@ Le projet est découpé en modules pour mieux isoler les responsabilités :
 pnpm install
 pnpm run vitest
 ```
+
+pour la couverture des tests
+```bash
+pnpm run coverage
+```
+
 pour afficher l'UI :
 ```bash
 pnpm run dev
